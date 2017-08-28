@@ -5,11 +5,16 @@ This exercise is meant to demonstrate candidate's ability to build a sample appl
 The design is not the main concern of the exercise, still the application should be good looking enough,  so that user's eyes doesn't start bleeding while using the application.
 
 ## Objective
-The application will make use of a websocket endpoint to list city bikes services, list the stations of one of those services with their status, available bikes and free slots.
-The websocket is wss://find-a-bike.herokuapp.com/.
-It must be possible to list the networks, to choose one to see the list of its stations, to subscribe / unsubscribe to stations changes and to reflect those changes.
-The stations should be grouped by department and city.
-Currently, he only available network in the backend is `'velib'`. Choosing another one should be either prevented and / or should display an explanatory message to the user.
+The application will make use of a websocket endpoint to list wikipedia projects, list the pages in a given project and show changes on pages in realtims.
+The websocket is wss://wiki-meta-explorer.herokuapp.com/.
+It must be possible to:
+- list the projects
+- choose one project to see the list of its pages
+- subscribe / unsubscribe to project changes (pages edition only) and to reflect those changes
+- view the metadata about one specific page
+- subscribe / unsubscribe to page changes
+
+It must be possible to browse through the projects / pages.
 
 ## Backend API
 
@@ -34,7 +39,7 @@ Response messages have the form
 ```
 {
   "id": <ID_MATCHING_THE_REQUEST_ID>,
-  "name": "response",
+  "name": <NAME_OF_THE_COMMAND>,
   "data": <DATA_RETURNED_BY_THE_CALL>
 }
 ```
@@ -43,57 +48,74 @@ Update messages have the form
 ```
 {
   "id": <ID_MATCHING_THE_REQUEST_ID>,
-  "name": "update",
-  "type": <TYPE_OF_UPDATED_DATA>,
+  "name": <"page.update"|"project.update">,
   "data": <UPDATED_DATA> // ONLY CONTAINS CHANGED DATA
 }
 ```
 
 ### Available commands
 
-#### `network.list`
+#### `project.list`
 ##### Description
-Returns the list of networks available.
+Returns the list of projects available.
 ##### Arguments
 Doesn't take any argument.
 
-#### `station.list`
+#### `page.list`
 ##### Description
-Returns the list of stations available for a given network.
+Returns the list of pages in a given project.
 ##### Arguments
-`network`: The id of the network. So far, the only acceptable value is `'velib'`. Any other value will never return.
+`project`: The name of the project as returned by `project.list` call.
 
-#### `station.subscribe`
+#### `page.query`
 ##### Description
-Subscribe to stations updates.
+Return a specific page.
 ##### Arguments
-`network`: The id of the network. So far, the only acceptable value is `'velib'`. Any other value will never return nor send any update.
+`pageId`: The id of the page.
 
-#### `station.unsubscribe`
+#### `project.subscribe`
 ##### Description
-Subscribe to stations updates.
+Subscribe to project updates.
 ##### Arguments
-Doesn't take any argument. The latest subscription is canceled.
+`project`: The name of the project as returned by `project.list` call.
+
+#### `project.unsubscribe`
+##### Description
+Unsubscribe from project updates.
+##### Arguments
+Doesn't take any argument (there can be only one subscription a the time).
+
+#### `page.subscribe`
+##### Description
+Subscribe to page updates.
+##### Arguments
+`pageId`: The id of the page.
+
+#### `page.unsubscribe`
+##### Description
+Unsubscribe from page updates.
+##### Arguments
+Doesn't take any argument (there can be only one subscription a the time).
 
 ### Data model
-#### `network`
+#### `page`
 ```
 {
-  "id": <NETWORK_ID>,
-  "name": <DISPLAY_NAME_OF_THE_NETWORK>
-  "country": <COUNTRY_WHERE_THE_NETWORK_OPERATE>,
-  "city": <CITY_WHERE_THE_NETWORK_OPERATE>
-}
-```
-
-#### `station`
-```
-{
-  "id": <STATION_ID>,
-  "name": <DISPLAY_NAME_OF_THE_STATION>
-  "empty_slots": <NUMBER_OF_FREE_SLOTS_IN_THE_STATION>,
-  "free_bikes": <NUMBER_OF_AVAILABLE_BIKES_IN_THE_STATION>,
-  "department": <CODE_OF_THE_COUNTY_THE_STATION_IS_LOCATED_IN>
-  "city": <CITY_THE_STATION_IS_LOCATED_IN>
+  "pageid": 9020,
+  "title": "Daisy Duck",
+  "pagelanguage": "en",
+  "pagelanguagedir": "ltr",
+  "length": 37954,
+  "lastrevid": 797710133,
+  "revisions": [
+    {
+      "revid": 797710133,
+      "parentid": 797709597,
+      "user": "XXX.YYY.ZZZ.WWW",
+      "anon": "",
+      "timestamp": "2017-08-28T19:03:35Z",
+      "comment": ""
+    }
+  ]
 }
 ```
