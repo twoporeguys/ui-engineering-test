@@ -5,14 +5,14 @@ This exercise is meant to demonstrate candidate's ability to build a sample appl
 The design is not the main concern of the exercise, still the application should be good looking enough,  so that user's eyes doesn't start bleeding while using the application.
 
 ## Objective
-The application will make use of a websocket endpoint to list wikipedia projects, list the pages in a given project and show changes on pages in realtims.
+The application will make use of a websocket endpoint to list wikipedia projects, list the pages in a given project and show changes on a page in realtime.
 The websocket is wss://wiki-meta-explorer.herokuapp.com/.
 It must be possible to:
 - list the projects
 - choose one project to see the list of its pages
 - subscribe / unsubscribe to project changes (pages edition only) and to reflect those changes
 - view the metadata about one specific page
-- subscribe / unsubscribe to page changes
+- subscribe / unsubscribe to page changes (only one page can be subscribed to at a time)
 
 It must be possible to browse through the projects / pages.
 
