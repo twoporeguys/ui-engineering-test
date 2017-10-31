@@ -97,6 +97,12 @@ Unsubscribe from page updates.
 ##### Arguments
 Doesn't take any argument (there can be only one subscription a the time).
 
+#### `ping`
+##### Description
+Ping the server. Useful to ensure the connection is kept open. The server might answer with `{name: "pong"}`.
+##### Arguments
+Doesn't take any argument.
+
 ### Data model
 #### `page`
 ```
