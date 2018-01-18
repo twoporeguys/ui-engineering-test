@@ -50,9 +50,10 @@ type Request struct {
 }
 
 type Response struct {
-	Id   string      `json:"id"`
-	Name string      `json:"name"`
-	Data interface{} `json:"data,omitEmpty"`
+	Id        string      `json:"id"`
+	Namespace string      `json:"namespace"`
+	Name      string      `json:"name"`
+	Data      interface{} `json:"data,omitEmpty"`
 }
 
 type Update struct {
@@ -94,6 +95,7 @@ const (
 	Get         = "get"
 	Subscribe   = "subscribe"
 	Unsubscribe = "unsubscribe"
+	Control     = "control"
 )
 
 const (
@@ -104,6 +106,8 @@ const (
 	StockPeers   = "stock.peers"
 	StockCurrent = "stock.current"
 	StockNews    = "stock.news"
+	Ping         = "ping"
+	Pong         = "pong"
 )
 
 func (h wsHandler) getStocks() []Stock {
@@ -230,7 +234,7 @@ func (h wsHandler) handleSubscribeNews(stock string) chan struct{} {
 }
 
 func (h wsHandler) dispatch(message Request) {
-	response := Response{message.Id, message.Name, nil}
+	response := Response{message.Id, message.Namespace, message.Name, map[string]interface{}{}}
 	switch message.Namespace {
 	case Get:
 		switch message.Name {
@@ -268,6 +272,12 @@ func (h wsHandler) dispatch(message Request) {
 				close(h.newsBatch)
 				h.newsBatch = nil
 			}
+		}
+	case Control:
+		switch message.Name {
+		case Ping:
+			message.Name = Pong
+		case Pong:
 		}
 	}
 	h.conn.WriteJSON(response)
