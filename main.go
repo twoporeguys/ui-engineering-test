@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -269,8 +270,18 @@ func (h wsHandler) dispatch(message Request) {
 	h.conn.WriteJSON(response)
 }
 
+func getPort() string {
+	var port = os.Getenv("PORT")
+	// Set a default port if there is nothing in the environment
+	if port == "" {
+		port = "4747"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return ":" + port
+}
+
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	http.Handle("/", wsHandler{})
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	log.Fatal(http.ListenAndServe(getPort(), nil))
 }
