@@ -35,7 +35,7 @@ func (h wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	for {
 		message := Request{}
 		h.conn.ReadJSON(&message)
-		go h.dispatch(message)
+		h.dispatch(message)
 	}
 }
 
