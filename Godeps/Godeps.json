@@ -1,0 +1,12 @@
+{
+	"ImportPath": "stock-browser",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/websocket",
+			"Comment": "v1.2.0-26-g292fd08",
+			"Rev": "292fd08b2560ad524ee37396253d71570339a821"
+		}
+	]
+}
