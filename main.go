@@ -276,11 +276,14 @@ func (h wsHandler) dispatch(message Request) {
 	case Control:
 		switch message.Name {
 		case Ping:
-			message.Name = Pong
+			response.Name = Pong
 		case Pong:
+			response.Namespace = ""
 		}
 	}
-	h.conn.WriteJSON(response)
+	if response.Namespace != "" {
+		h.conn.WriteJSON(response)
+	}
 }
 
 func getPort() string {
