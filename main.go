@@ -34,7 +34,10 @@ func (h wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	defer h.conn.Close()
 	for {
 		message := Request{}
-		h.conn.ReadJSON(&message)
+		err := h.conn.ReadJSON(&message)
+		if err != nil {
+			break
+		}
 		h.dispatch(message)
 	}
 }
