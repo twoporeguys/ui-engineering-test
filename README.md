@@ -6,7 +6,7 @@ The design is not the main concern of the exercise, still the application should
 
 ## Objective
 The application will make use of a websocket endpoint to list NASDAQ stocks, get data about a stock and subscribe to updates of those data.
-The websocket is wss://stock-browser.herokuapp.com/.
+The websocket is `wss://stock-browser.herokuapp.com/`.
 It must be possible to:
 - list stocks
 - show quote for a stock
@@ -21,6 +21,9 @@ It must be possible to:
 
 *NASDAQ being open from 4am to 8pm EST, there may not be updates on stocks outside of those hours.*
 **
+
+It is also recommended that you write at least one test as an exemplar of your approach to testing.
+
 ## Backend API
 
 ### Messages format
