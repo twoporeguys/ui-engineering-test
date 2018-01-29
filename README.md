@@ -6,7 +6,7 @@ The design is not the main concern of the exercise, still the application should
 
 ## Objective
 The application will make use of a websocket endpoint to list wikipedia projects, list the pages in a given project and show changes on a page in realtime.
-The websocket is wss://wiki-meta-explorer.herokuapp.com/.
+The websocket is `wss://wiki-meta-explorer.herokuapp.com/`.
 It must be possible to:
 - list the projects
 - choose one project to see the list of its pages
@@ -15,6 +15,8 @@ It must be possible to:
 - subscribe / unsubscribe to page changes (only one page can be subscribed to at a time)
 
 It must be possible to browse through the projects / pages.
+
+It is also recommended that you write at least one test as an exemplar of your approach to testing.
 
 ## Backend API
 
