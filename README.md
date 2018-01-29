@@ -6,10 +6,12 @@ The design is not the main concern of the exercise, still the application should
 
 ## Objective
 The application will make use of a websocket endpoint to list city bikes services, list the stations of one of those services with their status, available bikes and free slots.
-The websocket is wss://find-a-bike.herokuapp.com/.
+The websocket is `wss://find-a-bike.herokuapp.com/`.
 It must be possible to list the networks, to choose one to see the list of its stations, to subscribe / unsubscribe to stations changes and to reflect those changes.
 The stations should be grouped by department and city.
 Currently, he only available network in the backend is `'velib'`. Choosing another one should be either prevented and / or should display an explanatory message to the user.
+
+It is also recommended that you write at least one test as an exemplar of your approach to testing.
 
 ## Backend API
 
